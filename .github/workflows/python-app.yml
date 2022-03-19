@@ -26,3 +26,4 @@ jobs:
       run: poetry install --quiet
     - name: Lint with flake8
       run: poetry run flake8 -q
+
