@@ -2,6 +2,7 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/rousuy/twelve_factor_app_concetps.git)
 ![APM](https://img.shields.io/apm/l/vim-mode?logo=License)
 [![made-with-python3](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![codecov](https://codecov.io/gh/rousuy/twelve_factor_app_concepts/branch/main/graph/badge.svg?token=9EY51AYX1D)](https://codecov.io/gh/rousuy/twelve_factor_app_concepts)
 
 <div style="text-align: center;">
 <h2>Twelve Factor App</h2>
