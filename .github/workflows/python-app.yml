@@ -24,4 +24,11 @@ jobs:
       run: poetry install --quiet
     - name: Lint with flake8
       run: poetry run flake8 -q
+    - name: Run pytest-Django
+      run: poetry run pytest --cov=djangoproject
+    - name: after success notify codecov report
+      if: ${{ success() }}
+      run: poetry run codecov
+
+
 
