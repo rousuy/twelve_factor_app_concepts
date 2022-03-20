@@ -106,9 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -118,9 +118,44 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# Configuração de Ambiente de Desenvolvimento:
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Upload de Arquivos
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+COLLECTFAST_ENABLE = False
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# Storage configuration in S3 AWS
+if AWS_ACCESS_KEY_ID:
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age = 86400', }  # Controle de cache do S3
+    AWS_PRELOAD_METADA = True
+    AWS_AUTO_CREATE_BUCKET = False  # Para não criar buckets automaticamente
+    AWS_QUERYSTRING_AUTH = True  # Para gerar URL's assianadas
+    AWS_S3_CUSTOM_DOMAIN = None  # Para utilizar o próprio domínio do S3
+    AWS_DEFAULT_ACL = 'private'  # Para que os arquivos do S3 não fiquem públicos
+
+    # Configurações dos arquivos estáticos
+    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'  # Classe da biblioteca, que irá fazer a gestão do static
+    STATIC_S3_PATH = 'static'  # Caminho (path) padrão dos arquivos estáticos
+    STATIC_ROOT = f'/{STATIC_S3_PATH}/'  # Irá sobrescrever o caminho do STATIC_ROOT pré definido anteriormente
+    STATIC_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{STATIC_S3_PATH}/'  # Caminho que irá apontar pro S3
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'  # Irá adicionar o prefixo admin para os arquivos estáticos
+
+    # Upload Media Folder
+    DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'  # Irá fazer a gestão dos uploads de arquivo
+    DEFAULT_S3_PATH = 'media'
+    MEDIA_ROOT = f'/{DEFAULT_S3_PATH}/'  # Irá sobrescrever o caminho do MEDIA_ROOT pré definido anteriormente
+    MEDIA_URL = f'//s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{DEFAULT_S3_PATH}/'  # Media de arquivos apontado pro S3
+
+    INSTALLED_APPS.append('s3_folder_storage')  # Irá fazer a inclusão apenas se o AWS_KEY_ID estiver configurado
+    INSTALLED_APPS.append('storages')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
