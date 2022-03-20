@@ -9,28 +9,46 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: ['5432:5432']
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
         python-version: 3.10.0
+
+    - name: Copy the contrib folder
+      run: cp contrib/env-sample .env
+
     - name: Install poetry ${{ matrix.poetry-version }}
       run: |
         python -m ensurepip
         python -m pip install --upgrade pip
         python -m pip install poetry==1.1.5
+
     - name: Install dependencies for project
       run: poetry install --quiet
-    - name: Copy the contrib folder
-      run: cp contrib/env-sample .env
+
     - name: Lint with flake8
       run: poetry run flake8 -q
+
     - name: Run pytest-Django
       run: poetry run pytest --cov=djangoproject
-    - name: after success notify codecov report
-      if: ${{ success() }}
+
+    - name: notify codecov report
+      env:
+        CODECOV_TOKEN: "7fd02c1d-9830-4b25-bc47-69d2de8106b9"
       run: poetry run codecov
+
 
 
 
