@@ -42,7 +42,7 @@ jobs:
       run: poetry run flake8 -q
 
     - name: Run pytest-Django
-      run: poetry run pytest --cov=djangoproject
+      run: poetry run pytest djangoproject --cov=djangoproject
 
     - name: notify codecov report
       env:
