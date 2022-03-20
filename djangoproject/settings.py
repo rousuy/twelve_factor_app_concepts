@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'collectfast',
     'django.contrib.staticfiles',
     'djangoproject.base',
 ]
@@ -128,7 +129,7 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-COLLECTFAST_ENABLE = False
+COLLECTFAST_ENABLE = False  # Desativado em ambiente de desenvolvimento local
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 # Storage configuration in S3 AWS
@@ -141,6 +142,7 @@ if AWS_ACCESS_KEY_ID:
     AWS_QUERYSTRING_AUTH = True  # Para gerar URL's assianadas
     AWS_S3_CUSTOM_DOMAIN = None  # Para utilizar o próprio domínio do S3
     AWS_DEFAULT_ACL = 'private'  # Para que os arquivos do S3 não fiquem públicos
+    COLLECTFAST_ENABLE = True  # Caso a variável da AWS estiver ativa
 
     # Configurações dos arquivos estáticos
     STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'  # Classe da biblioteca, que irá fazer a gestão do static
