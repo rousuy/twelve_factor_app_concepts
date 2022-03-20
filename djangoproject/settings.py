@@ -129,6 +129,7 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
+
 COLLECTFAST_ENABLE = False  # Desativado em ambiente de desenvolvimento local
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
@@ -141,7 +142,7 @@ if AWS_ACCESS_KEY_ID:
     AWS_AUTO_CREATE_BUCKET = False  # Para não criar buckets automaticamente
     AWS_QUERYSTRING_AUTH = True  # Para gerar URL's assianadas
     AWS_S3_CUSTOM_DOMAIN = None  # Para utilizar o próprio domínio do S3
-    AWS_DEFAULT_ACL = 'private'  # Para que os arquivos do S3 não fiquem públicos
+    AWS_DEFAULT_ACL = 'private'  # Para que os arquivos do S3 não fiquem público
     COLLECTFAST_ENABLE = True  # Caso a variável da AWS estiver ativa
 
     # Configurações dos arquivos estáticos
