@@ -81,10 +81,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'djangoproject.wsgi.application'
 
 INTERNAL_IPS = config('INTERNAL_IPS', cast=Csv(), default='127.0.0.1')
+
 # Configuração Django Debug Toolbar
 if DEBUG:
     INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 
 # Database
@@ -152,7 +153,7 @@ if AWS_ACCESS_KEY_ID:
     AWS_AUTO_CREATE_BUCKET = False  # Para não criar buckets automaticamente
     AWS_QUERYSTRING_AUTH = True  # Para gerar URL's assianadas
     AWS_S3_CUSTOM_DOMAIN = None  # Para utilizar o próprio domínio do S3
-    AWS_DEFAULT_ACL = 'public-read'  # Para que os arquivos do S3 não fiquem públicos
+    AWS_DEFAULT_ACL = 'private'  # Para que os arquivos do S3 não fiquem públicos
     COLLECTFAST_ENABLE = True  # Caso a variável da AWS estiver ativa
     STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
