@@ -14,8 +14,8 @@ def test_status_code(response):
 
 
 def test_title(response):
-    assert_contains(response, '<title> Django Project</title>')
+    assert_contains(response, '<title>Rousuy</title>')
 
 
 def test_home_link(response):
-    assert_contains(response, f'href="{reverse("base:home")}">Django Project</a>')
+    assert_contains(response, f'href="{reverse("base:home")}">Rousuy</a>')
