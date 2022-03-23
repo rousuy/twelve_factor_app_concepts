@@ -144,6 +144,7 @@ MEDIA_ROOT = str(BASE_DIR / 'mediafiles')
 COLLECTFAST_ENABLE = False  # Desativado em ambiente de desenvolvimento local
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+
 # Storage configuration in S3 AWS
 if AWS_ACCESS_KEY_ID:
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
