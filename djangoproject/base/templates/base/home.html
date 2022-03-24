@@ -35,7 +35,7 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron text-center">
@@ -56,7 +56,8 @@
 				</h5>
 				<div class="card-body">
 					<p class="card-text">
-                        <img src="{% static 'img/rodrigo1.png' %}" class="img-thumbnail float-left" alt="rodrigo photo">
+                        <img src="{% static 'img/rodrigo1.png' %}" alt="rodrigo photo"
+                             class="img-thumbnail float-left mr-1"/>
                         Análista e Desenvolvedor de Sistemas, com habilidades para desenvolvimento e implantação de
                         software, envolvendo o dimensionamento de requisitos e suas funcionalidades, incluindo técnicas
                         de arquitetura e boas práticas de desenvolvimento, baseado em contrução de aplicações
@@ -68,5 +69,26 @@
 		</div>
 	</div>
 </div>
-  </body>
+<footer class="main-footer">
+    <div class = "container">
+        <div class = "row">
+            <div class = "col">
+                <h3>Entre em contato</h3>
+                <adress>
+                    +55 11 97419-2164
+                    <br/>
+                    <a href="mailto:rousuy@gmail.com">rousuy@gmail.com</a>
+                </adress>
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col">
+                {% now 'Y' %} Rousuy. Todos os direitos reservados
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
 </html>
